@@ -15,11 +15,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-pal', 'aurelia-templat
     });
   }
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  
 
   function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
     var desc = {};
@@ -69,7 +65,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-pal', 'aurelia-templat
     execute: function () {
       _export('OnsInput', OnsInput = (_dec = customElement('ons-input'), _dec2 = inject(DOM.Element), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = noView(_class = _dec2(_class = (_class2 = function () {
         function OnsInput(element) {
-          _classCallCheck(this, OnsInput);
+          
 
           _initDefineProp(this, 'value', _descriptor, this);
 

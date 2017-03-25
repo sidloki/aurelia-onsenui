@@ -1,27 +1,4 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.OnsNavigator = undefined;
-
 var _dec, _dec2, _class, _desc, _value, _class2, _descriptor;
-
-var _onsenui = require('onsenui');
-
-var _onsenui2 = _interopRequireDefault(_onsenui);
-
-var _aureliaDependencyInjection = require('aurelia-dependency-injection');
-
-var _aureliaPal = require('aurelia-pal');
-
-var _aureliaTemplating = require('aurelia-templating');
-
-var _pageLoader = require('./page-loader');
-
-var _lifecycle = require('./lifecycle');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -68,7 +45,14 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-var OnsNavigator = exports.OnsNavigator = (_dec = (0, _aureliaTemplating.customElement)('ons-navigator'), _dec2 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element, _aureliaDependencyInjection.Container, _aureliaTemplating.CompositionEngine, _pageLoader.PageLoader, _aureliaTemplating.ViewSlot), _dec(_class = (0, _aureliaTemplating.noView)(_class = _dec2(_class = (_class2 = function () {
+import ons from 'onsenui';
+import { inject, Container } from 'aurelia-dependency-injection';
+import { DOM } from 'aurelia-pal';
+import { ViewSlot, CompositionEngine, customElement, noView, bindable } from 'aurelia-templating';
+import { PageLoader } from './page-loader';
+import { invokeLifecycle } from './lifecycle';
+
+export var OnsNavigator = (_dec = customElement('ons-navigator'), _dec2 = inject(DOM.Element, Container, CompositionEngine, PageLoader, ViewSlot), _dec(_class = noView(_class = _dec2(_class = (_class2 = function () {
   function OnsNavigator(element, container, compositionEngine, pageLoader, viewSlot) {
     
 
@@ -80,7 +64,7 @@ var OnsNavigator = exports.OnsNavigator = (_dec = (0, _aureliaTemplating.customE
     this.pageLoader = pageLoader;
     this.viewSlot = viewSlot;
 
-    this.element.pageLoader = new _onsenui2.default.PageLoader(this.load.bind(this), this.unload.bind(this));
+    this.element.pageLoader = new ons.PageLoader(this.load.bind(this), this.unload.bind(this));
     this._pushPage = this.element.pushPage.bind(element);
     this._popPage = this.element.popPage.bind(element);
     this.element.pushPage = this.pushPage.bind(this);
@@ -119,7 +103,7 @@ var OnsNavigator = exports.OnsNavigator = (_dec = (0, _aureliaTemplating.customE
     var _this2 = this;
 
     var controller = this.controllers.pop();
-    return (0, _lifecycle.invokeLifecycle)(controller.viewModel, 'deactivate').then(function () {
+    return invokeLifecycle(controller.viewModel, 'deactivate').then(function () {
       _this2.viewSlot.remove(controller.view);
       controller.view.unbind();
     });
@@ -134,7 +118,7 @@ var OnsNavigator = exports.OnsNavigator = (_dec = (0, _aureliaTemplating.customE
       model: options.data || {}
     };
     return this.pageLoader.loadPage(this, config).then(function (context) {
-      (0, _lifecycle.invokeLifecycle)(context.viewModel, 'canActivate', context.model).then(function (canActivate) {
+      invokeLifecycle(context.viewModel, 'canActivate', context.model).then(function (canActivate) {
         if (canActivate) {
           _this3.nextPage = context;
           _this3._pushPage(page, options);
@@ -147,7 +131,7 @@ var OnsNavigator = exports.OnsNavigator = (_dec = (0, _aureliaTemplating.customE
     var _this4 = this;
 
     var controller = this.controllers[this.controllers.length - 1];
-    return (0, _lifecycle.invokeLifecycle)(controller.viewModel, 'canDeactivate').then(function (canDeactivate) {
+    return invokeLifecycle(controller.viewModel, 'canDeactivate').then(function (canDeactivate) {
       if (canDeactivate) {
         _this4._popPage(options);
       }
@@ -155,7 +139,7 @@ var OnsNavigator = exports.OnsNavigator = (_dec = (0, _aureliaTemplating.customE
   };
 
   return OnsNavigator;
-}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_aureliaTemplating.bindable], {
+}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [bindable], {
   enumerable: true,
   initializer: null
 })), _class2)) || _class) || _class) || _class);

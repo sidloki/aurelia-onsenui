@@ -1,18 +1,17 @@
 'use strict';
 
-System.register(['aurelia-pal'], function (_export, _context) {
+System.register(['./aurelia-onsenui'], function (_export, _context) {
   "use strict";
 
-  var PLATFORM;
-  function configure(config) {
-    config.globalResources([PLATFORM.moduleName('./ons-input'), PLATFORM.moduleName('./ons-navigator'), PLATFORM.moduleName('./ons-tab')]);
-  }
-
-  _export('configure', configure);
-
   return {
-    setters: [function (_aureliaPal) {
-      PLATFORM = _aureliaPal.PLATFORM;
+    setters: [function (_aureliaOnsenui) {
+      var _exportObj = {};
+
+      for (var _key in _aureliaOnsenui) {
+        if (_key !== "default" && _key !== "__esModule") _exportObj[_key] = _aureliaOnsenui[_key];
+      }
+
+      _export(_exportObj);
     }],
     execute: function () {}
   };

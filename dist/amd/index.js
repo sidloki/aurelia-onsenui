@@ -1,11 +1,16 @@
-define(['exports', 'aurelia-pal'], function (exports, _aureliaPal) {
+define(['exports', './aurelia-onsenui'], function (exports, _aureliaOnsenui) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.configure = configure;
-  function configure(config) {
-    config.globalResources([_aureliaPal.PLATFORM.moduleName('./ons-input'), _aureliaPal.PLATFORM.moduleName('./ons-navigator'), _aureliaPal.PLATFORM.moduleName('./ons-tab')]);
-  }
+  Object.keys(_aureliaOnsenui).forEach(function (key) {
+    if (key === "default" || key === "__esModule") return;
+    Object.defineProperty(exports, key, {
+      enumerable: true,
+      get: function () {
+        return _aureliaOnsenui[key];
+      }
+    });
+  });
 });

@@ -24,11 +24,7 @@ define(['exports', 'onsenui', 'aurelia-dependency-injection', 'aurelia-pal', 'au
     });
   }
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  
 
   function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
     var desc = {};
@@ -67,7 +63,7 @@ define(['exports', 'onsenui', 'aurelia-dependency-injection', 'aurelia-pal', 'au
 
   var OnsNavigator = exports.OnsNavigator = (_dec = (0, _aureliaTemplating.customElement)('ons-navigator'), _dec2 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element, _aureliaDependencyInjection.Container, _aureliaTemplating.CompositionEngine, _pageLoader.PageLoader, _aureliaTemplating.ViewSlot), _dec(_class = (0, _aureliaTemplating.noView)(_class = _dec2(_class = (_class2 = function () {
     function OnsNavigator(element, container, compositionEngine, pageLoader, viewSlot) {
-      _classCallCheck(this, OnsNavigator);
+      
 
       _initDefineProp(this, 'page', _descriptor, this);
 

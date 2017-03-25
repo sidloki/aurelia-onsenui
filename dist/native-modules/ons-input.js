@@ -1,19 +1,4 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.OnsInput = undefined;
-
 var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor;
-
-var _aureliaDependencyInjection = require('aurelia-dependency-injection');
-
-var _aureliaPal = require('aurelia-pal');
-
-var _aureliaTemplating = require('aurelia-templating');
-
-var _aureliaBinding = require('aurelia-binding');
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -60,7 +45,12 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-var OnsInput = exports.OnsInput = (_dec = (0, _aureliaTemplating.customElement)('ons-input'), _dec2 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element), _dec3 = (0, _aureliaTemplating.bindable)({ defaultBindingMode: _aureliaBinding.bindingMode.twoWay }), _dec(_class = (0, _aureliaTemplating.noView)(_class = _dec2(_class = (_class2 = function () {
+import { inject } from 'aurelia-dependency-injection';
+import { DOM } from 'aurelia-pal';
+import { customElement, noView, bindable } from 'aurelia-templating';
+import { bindingMode } from 'aurelia-binding';
+
+export var OnsInput = (_dec = customElement('ons-input'), _dec2 = inject(DOM.Element), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = noView(_class = _dec2(_class = (_class2 = function () {
   function OnsInput(element) {
     
 

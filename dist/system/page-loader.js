@@ -5,11 +5,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-templating', 'aurelia-
 
   var inject, CompositionEngine, useView, customElement, relativeToFile, Origin, _dec, _class, PageLoader;
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  
 
   function createDynamicClass(moduleId) {
     var _dec2, _dec3, _class2;
@@ -18,7 +14,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-templating', 'aurelia-
 
     var DynamicClass = (_dec2 = customElement(name), _dec3 = useView(moduleId), _dec2(_class2 = _dec3(_class2 = function () {
       function DynamicClass() {
-        _classCallCheck(this, DynamicClass);
+        
       }
 
       DynamicClass.prototype.bind = function bind(bindingContext) {
@@ -46,7 +42,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-templating', 'aurelia-
     execute: function () {
       _export('PageLoader', PageLoader = (_dec = inject(CompositionEngine), _dec(_class = function () {
         function PageLoader(compositionEngine) {
-          _classCallCheck(this, PageLoader);
+          
 
           this.compositionEngine = compositionEngine;
         }

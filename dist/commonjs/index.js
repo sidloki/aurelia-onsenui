@@ -3,10 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.configure = configure;
 
-var _aureliaPal = require('aurelia-pal');
+var _aureliaOnsenui = require('./aurelia-onsenui');
 
-function configure(config) {
-  config.globalResources([_aureliaPal.PLATFORM.moduleName('./ons-input'), _aureliaPal.PLATFORM.moduleName('./ons-navigator'), _aureliaPal.PLATFORM.moduleName('./ons-tab')]);
-}
+Object.keys(_aureliaOnsenui).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _aureliaOnsenui[key];
+    }
+  });
+});

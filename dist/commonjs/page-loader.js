@@ -15,11 +15,11 @@ var _aureliaPath = require('aurelia-path');
 
 var _aureliaMetadata = require('aurelia-metadata');
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 
 var PageLoader = exports.PageLoader = (_dec = (0, _aureliaDependencyInjection.inject)(_aureliaTemplating.CompositionEngine), _dec(_class = function () {
   function PageLoader(compositionEngine) {
-    _classCallCheck(this, PageLoader);
+    
 
     this.compositionEngine = compositionEngine;
   }
@@ -49,7 +49,7 @@ function createDynamicClass(moduleId) {
 
   var DynamicClass = (_dec2 = (0, _aureliaTemplating.customElement)(name), _dec3 = (0, _aureliaTemplating.useView)(moduleId), _dec2(_class2 = _dec3(_class2 = function () {
     function DynamicClass() {
-      _classCallCheck(this, DynamicClass);
+      
     }
 
     DynamicClass.prototype.bind = function bind(bindingContext) {

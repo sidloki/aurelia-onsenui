@@ -15,11 +15,7 @@ System.register(['onsenui', 'aurelia-dependency-injection', 'aurelia-pal', 'aure
     });
   }
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  
 
   function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
     var desc = {};
@@ -76,7 +72,7 @@ System.register(['onsenui', 'aurelia-dependency-injection', 'aurelia-pal', 'aure
     execute: function () {
       _export('OnsNavigator', OnsNavigator = (_dec = customElement('ons-navigator'), _dec2 = inject(DOM.Element, Container, CompositionEngine, PageLoader, ViewSlot), _dec(_class = noView(_class = _dec2(_class = (_class2 = function () {
         function OnsNavigator(element, container, compositionEngine, pageLoader, viewSlot) {
-          _classCallCheck(this, OnsNavigator);
+          
 
           _initDefineProp(this, 'page', _descriptor, this);
 
