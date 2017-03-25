@@ -7,23 +7,21 @@ module.exports = function(config) {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
+
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jspm', 'jasmine'],
 
     jspm: {
       // Edit this to your needs
-      loadFiles: ['test/setup.js', 'test/unit/**/*.js'],
-      serveFiles: ['src/**/*.js'],
-      paths: {
-        '*': '*',
-        'github:*': 'jspm_packages/github/*',
-        'npm:*': 'jspm_packages/npm/*'
-      }
+      loadFiles: ['test/setup.js', 'test/**/*.js'],
+      serveFiles: ['src/**/*.*', 'test/fixtures/**/*.html']
     },
+
 
     // list of files / patterns to load in the browser
     files: [],
+
 
     // list of files to exclude
     exclude: [],
@@ -38,7 +36,7 @@ module.exports = function(config) {
     'babelPreprocessor': {
       options: {
         sourceMap: 'inline',
-        presets: [['es2015', { loose: true }], 'stage-1'],
+        presets: [ 'es2015-loose', 'stage-1'],
         plugins: [
           'syntax-flow',
           'transform-decorators-legacy',
@@ -52,22 +50,28 @@ module.exports = function(config) {
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress'],
 
+
     // web server port
     port: 9876,
 
+
     // enable / disable colors in the output (reporters and logs)
     colors: true,
+
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
+
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
+
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
+
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
