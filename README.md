@@ -44,6 +44,20 @@ export function configure(aurelia) {
 }
 ```
 
+Add the Onsen UI CSS files to your `index.html`:
+
+```html
+<html>
+  <head>
+    ...
+    <link rel="stylesheet" type="text/css" href="node_modules/onsenui/css/onsenui.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/onsenui/css/onsen-css-components.css">
+    ...
+  </head>
+  ...
+</html>
+```
+
 ## Usage
 
 ### Navigator
