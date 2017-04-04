@@ -7,7 +7,7 @@ import {PageLoader} from './page-loader';
 @customElement('ons-tab')
 @noView
 @inject(DOM.Element, Container, CompositionEngine, PageLoader, ViewSlot)
-export class OnsNavigatorView {
+export class OnsTab {
   @bindable page;
   @bindable active;
   element;
