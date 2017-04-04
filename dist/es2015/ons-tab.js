@@ -49,7 +49,7 @@ import { DOM } from 'aurelia-pal';
 import { ViewSlot, CompositionEngine, customElement, noView, bindable } from 'aurelia-templating';
 import { PageLoader } from './page-loader';
 
-export let OnsNavigatorView = (_dec = customElement('ons-tab'), _dec2 = inject(DOM.Element, Container, CompositionEngine, PageLoader, ViewSlot), _dec(_class = noView(_class = _dec2(_class = (_class2 = class OnsNavigatorView {
+export let OnsTab = (_dec = customElement('ons-tab'), _dec2 = inject(DOM.Element, Container, CompositionEngine, PageLoader, ViewSlot), _dec(_class = noView(_class = _dec2(_class = (_class2 = class OnsTab {
 
   constructor(element, container, compositionEngine, pageLoader, viewSlot) {
     _initDefineProp(this, 'page', _descriptor, this);
@@ -84,7 +84,7 @@ export let OnsNavigatorView = (_dec = customElement('ons-tab'), _dec2 = inject(D
     };
     this.pageLoader.loadPage(this, config).then(context => {
       this.compositionEngine.createController(context).then(controller => {
-        let pageElement = controller.view.firstChild;
+        let pageElement = controller.view.fragment.firstElementChild;
         controller.automate(this.overrideContext, this.owningView);
         this.viewSlot.add(controller.view);
         this.controller = controller;

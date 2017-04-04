@@ -108,7 +108,7 @@ System.register(['onsenui', 'aurelia-dependency-injection', 'aurelia-pal', 'aure
               params = _ref.params;
 
           this.compositionEngine.createController(this.nextPage).then(function (controller) {
-            var pageElement = controller.view.firstChild;
+            var pageElement = controller.view.fragment.firstElementChild;
             _this.nextPage = null;
             controller.automate(_this.overrideContext, _this.owningView);
             _this.viewSlot.add(controller.view);

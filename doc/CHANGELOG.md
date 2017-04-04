@@ -1,3 +1,7 @@
+## 0.1.2 (2017-04-04)
+
+* Fix dom element for page loader callback
+
 ## 0.1.1 (2017-03-25)
 
 * Fix build

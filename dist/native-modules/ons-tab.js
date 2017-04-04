@@ -51,8 +51,8 @@ import { DOM } from 'aurelia-pal';
 import { ViewSlot, CompositionEngine, customElement, noView, bindable } from 'aurelia-templating';
 import { PageLoader } from './page-loader';
 
-export var OnsNavigatorView = (_dec = customElement('ons-tab'), _dec2 = inject(DOM.Element, Container, CompositionEngine, PageLoader, ViewSlot), _dec(_class = noView(_class = _dec2(_class = (_class2 = function () {
-  function OnsNavigatorView(element, container, compositionEngine, pageLoader, viewSlot) {
+export var OnsTab = (_dec = customElement('ons-tab'), _dec2 = inject(DOM.Element, Container, CompositionEngine, PageLoader, ViewSlot), _dec(_class = noView(_class = _dec2(_class = (_class2 = function () {
+  function OnsTab(element, container, compositionEngine, pageLoader, viewSlot) {
     
 
     _initDefineProp(this, 'page', _descriptor, this);
@@ -70,16 +70,16 @@ export var OnsNavigatorView = (_dec = customElement('ons-tab'), _dec2 = inject(D
     this.controller;
   }
 
-  OnsNavigatorView.prototype.created = function created(owningView) {
+  OnsTab.prototype.created = function created(owningView) {
     this.owningView = owningView;
   };
 
-  OnsNavigatorView.prototype.bind = function bind(bindingContext, overrideContext) {
+  OnsTab.prototype.bind = function bind(bindingContext, overrideContext) {
     this.container.viewModel = bindingContext;
     this.overrideContext = overrideContext;
   };
 
-  OnsNavigatorView.prototype.load = function load(_ref, done) {
+  OnsTab.prototype.load = function load(_ref, done) {
     var _this = this;
 
     var page = _ref.page,
@@ -93,7 +93,7 @@ export var OnsNavigatorView = (_dec = customElement('ons-tab'), _dec2 = inject(D
     };
     this.pageLoader.loadPage(this, config).then(function (context) {
       _this.compositionEngine.createController(context).then(function (controller) {
-        var pageElement = controller.view.firstChild;
+        var pageElement = controller.view.fragment.firstElementChild;
         controller.automate(_this.overrideContext, _this.owningView);
         _this.viewSlot.add(controller.view);
         _this.controller = controller;
@@ -102,13 +102,13 @@ export var OnsNavigatorView = (_dec = customElement('ons-tab'), _dec2 = inject(D
     });
   };
 
-  OnsNavigatorView.prototype.unload = function unload(pageElement) {
+  OnsTab.prototype.unload = function unload(pageElement) {
     var controller = this.controller;
     this.viewSlot.remove(controller.view);
     controller.view.unbind();
   };
 
-  return OnsNavigatorView;
+  return OnsTab;
 }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [bindable], {
   enumerable: true,
   initializer: null

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OnsNavigator = exports.OnsNavigatorView = exports.OnsInput = exports.PageLoader = undefined;
+exports.OnsNavigator = exports.OnsTab = exports.OnsInput = exports.PageLoader = undefined;
 
 var _dec, _class, _dec4, _dec5, _dec6, _class3, _desc, _value, _class4, _descriptor, _dec7, _dec8, _class6, _desc2, _value2, _class7, _descriptor2, _descriptor3, _dec9, _dec10, _class9, _desc3, _value3, _class10, _descriptor4;
 
@@ -157,9 +157,9 @@ function invokeLifecycle(instance, name, model) {
   return Promise.resolve(true);
 }
 
-var OnsNavigatorView = exports.OnsNavigatorView = (_dec7 = (0, _aureliaTemplating.customElement)('ons-tab'), _dec8 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element, _aureliaDependencyInjection.Container, _aureliaTemplating.CompositionEngine, PageLoader, _aureliaTemplating.ViewSlot), _dec7(_class6 = (0, _aureliaTemplating.noView)(_class6 = _dec8(_class6 = (_class7 = function () {
-  function OnsNavigatorView(element, container, compositionEngine, pageLoader, viewSlot) {
-    _classCallCheck(this, OnsNavigatorView);
+var OnsTab = exports.OnsTab = (_dec7 = (0, _aureliaTemplating.customElement)('ons-tab'), _dec8 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element, _aureliaDependencyInjection.Container, _aureliaTemplating.CompositionEngine, PageLoader, _aureliaTemplating.ViewSlot), _dec7(_class6 = (0, _aureliaTemplating.noView)(_class6 = _dec8(_class6 = (_class7 = function () {
+  function OnsTab(element, container, compositionEngine, pageLoader, viewSlot) {
+    _classCallCheck(this, OnsTab);
 
     _initDefineProp(this, 'page', _descriptor2, this);
 
@@ -176,16 +176,16 @@ var OnsNavigatorView = exports.OnsNavigatorView = (_dec7 = (0, _aureliaTemplatin
     this.controller;
   }
 
-  OnsNavigatorView.prototype.created = function created(owningView) {
+  OnsTab.prototype.created = function created(owningView) {
     this.owningView = owningView;
   };
 
-  OnsNavigatorView.prototype.bind = function bind(bindingContext, overrideContext) {
+  OnsTab.prototype.bind = function bind(bindingContext, overrideContext) {
     this.container.viewModel = bindingContext;
     this.overrideContext = overrideContext;
   };
 
-  OnsNavigatorView.prototype.load = function load(_ref, done) {
+  OnsTab.prototype.load = function load(_ref, done) {
     var _this = this;
 
     var page = _ref.page,
@@ -199,7 +199,7 @@ var OnsNavigatorView = exports.OnsNavigatorView = (_dec7 = (0, _aureliaTemplatin
     };
     this.pageLoader.loadPage(this, config).then(function (context) {
       _this.compositionEngine.createController(context).then(function (controller) {
-        var pageElement = controller.view.firstChild;
+        var pageElement = controller.view.fragment.firstElementChild;
         controller.automate(_this.overrideContext, _this.owningView);
         _this.viewSlot.add(controller.view);
         _this.controller = controller;
@@ -208,13 +208,13 @@ var OnsNavigatorView = exports.OnsNavigatorView = (_dec7 = (0, _aureliaTemplatin
     });
   };
 
-  OnsNavigatorView.prototype.unload = function unload(pageElement) {
+  OnsTab.prototype.unload = function unload(pageElement) {
     var controller = this.controller;
     this.viewSlot.remove(controller.view);
     controller.view.unbind();
   };
 
-  return OnsNavigatorView;
+  return OnsTab;
 }(), (_descriptor2 = _applyDecoratedDescriptor(_class7.prototype, 'page', [_aureliaTemplating.bindable], {
   enumerable: true,
   initializer: null
@@ -260,7 +260,7 @@ var OnsNavigator = exports.OnsNavigator = (_dec9 = (0, _aureliaTemplating.custom
         params = _ref2.params;
 
     this.compositionEngine.createController(this.nextPage).then(function (controller) {
-      var pageElement = controller.view.firstChild;
+      var pageElement = controller.view.fragment.firstElementChild;
       _this2.nextPage = null;
       controller.automate(_this2.overrideContext, _this2.owningView);
       _this2.viewSlot.add(controller.view);

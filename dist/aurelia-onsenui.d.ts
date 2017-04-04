@@ -44,7 +44,7 @@ export declare class OnsInput {
  * @returns Promise The result of the lifecycle method.
  */
 export declare function invokeLifecycle(instance?: any, name?: any, model?: any): any;
-export declare class OnsNavigatorView {
+export declare class OnsTab {
   page: any;
   active: any;
   element: any;

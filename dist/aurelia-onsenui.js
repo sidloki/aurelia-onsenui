@@ -92,7 +92,7 @@ export function invokeLifecycle(instance, name, model) {
 @customElement('ons-tab')
 @noView
 @inject(DOM.Element, Container, CompositionEngine, PageLoader, ViewSlot)
-export class OnsNavigatorView {
+export class OnsTab {
   @bindable page;
   @bindable active;
   element;
@@ -126,7 +126,7 @@ export class OnsNavigatorView {
     };
     this.pageLoader.loadPage(this, config).then((context) => {
       this.compositionEngine.createController(context).then((controller) => {
-        let pageElement = controller.view.firstChild;
+        let pageElement = controller.view.fragment.firstElementChild;
         controller.automate(this.overrideContext, this.owningView);
         this.viewSlot.add(controller.view);
         this.controller = controller;
@@ -176,7 +176,7 @@ export class OnsNavigator {
 
   load({page, parent, params}, done) {
     this.compositionEngine.createController(this.nextPage).then((controller) => {
-      let pageElement = controller.view.firstChild;
+      let pageElement = controller.view.fragment.firstElementChild;
       this.nextPage = null;
       controller.automate(this.overrideContext, this.owningView);
       this.viewSlot.add(controller.view);

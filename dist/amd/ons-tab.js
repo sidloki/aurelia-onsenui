@@ -4,7 +4,7 @@ define(['exports', 'onsenui', 'aurelia-dependency-injection', 'aurelia-pal', 'au
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.OnsNavigatorView = undefined;
+  exports.OnsTab = undefined;
 
   var _onsenui2 = _interopRequireDefault(_onsenui);
 
@@ -61,8 +61,8 @@ define(['exports', 'onsenui', 'aurelia-dependency-injection', 'aurelia-pal', 'au
 
   var _dec, _dec2, _class, _desc, _value, _class2, _descriptor, _descriptor2;
 
-  var OnsNavigatorView = exports.OnsNavigatorView = (_dec = (0, _aureliaTemplating.customElement)('ons-tab'), _dec2 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element, _aureliaDependencyInjection.Container, _aureliaTemplating.CompositionEngine, _pageLoader.PageLoader, _aureliaTemplating.ViewSlot), _dec(_class = (0, _aureliaTemplating.noView)(_class = _dec2(_class = (_class2 = function () {
-    function OnsNavigatorView(element, container, compositionEngine, pageLoader, viewSlot) {
+  var OnsTab = exports.OnsTab = (_dec = (0, _aureliaTemplating.customElement)('ons-tab'), _dec2 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element, _aureliaDependencyInjection.Container, _aureliaTemplating.CompositionEngine, _pageLoader.PageLoader, _aureliaTemplating.ViewSlot), _dec(_class = (0, _aureliaTemplating.noView)(_class = _dec2(_class = (_class2 = function () {
+    function OnsTab(element, container, compositionEngine, pageLoader, viewSlot) {
       
 
       _initDefineProp(this, 'page', _descriptor, this);
@@ -80,16 +80,16 @@ define(['exports', 'onsenui', 'aurelia-dependency-injection', 'aurelia-pal', 'au
       this.controller;
     }
 
-    OnsNavigatorView.prototype.created = function created(owningView) {
+    OnsTab.prototype.created = function created(owningView) {
       this.owningView = owningView;
     };
 
-    OnsNavigatorView.prototype.bind = function bind(bindingContext, overrideContext) {
+    OnsTab.prototype.bind = function bind(bindingContext, overrideContext) {
       this.container.viewModel = bindingContext;
       this.overrideContext = overrideContext;
     };
 
-    OnsNavigatorView.prototype.load = function load(_ref, done) {
+    OnsTab.prototype.load = function load(_ref, done) {
       var _this = this;
 
       var page = _ref.page,
@@ -103,7 +103,7 @@ define(['exports', 'onsenui', 'aurelia-dependency-injection', 'aurelia-pal', 'au
       };
       this.pageLoader.loadPage(this, config).then(function (context) {
         _this.compositionEngine.createController(context).then(function (controller) {
-          var pageElement = controller.view.firstChild;
+          var pageElement = controller.view.fragment.firstElementChild;
           controller.automate(_this.overrideContext, _this.owningView);
           _this.viewSlot.add(controller.view);
           _this.controller = controller;
@@ -112,13 +112,13 @@ define(['exports', 'onsenui', 'aurelia-dependency-injection', 'aurelia-pal', 'au
       });
     };
 
-    OnsNavigatorView.prototype.unload = function unload(pageElement) {
+    OnsTab.prototype.unload = function unload(pageElement) {
       var controller = this.controller;
       this.viewSlot.remove(controller.view);
       controller.view.unbind();
     };
 
-    return OnsNavigatorView;
+    return OnsTab;
   }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_aureliaTemplating.bindable], {
     enumerable: true,
     initializer: null
