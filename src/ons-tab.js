@@ -41,7 +41,7 @@ export class OnsTab {
     };
     this.pageLoader.loadPage(this, config).then((context) => {
       this.compositionEngine.createController(context).then((controller) => {
-        let pageElement = controller.view.firstChild;
+        let pageElement = controller.view.fragment.firstElementChild;
         controller.automate(this.overrideContext, this.owningView);
         this.viewSlot.add(controller.view);
         this.controller = controller;

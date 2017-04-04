@@ -39,7 +39,7 @@ export class OnsNavigator {
 
   load({page, parent, params}, done) {
     this.compositionEngine.createController(this.nextPage).then((controller) => {
-      let pageElement = controller.view.firstChild;
+      let pageElement = controller.view.fragment.firstElementChild;
       this.nextPage = null;
       controller.automate(this.overrideContext, this.owningView);
       this.viewSlot.add(controller.view);
