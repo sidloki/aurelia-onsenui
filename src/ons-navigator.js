@@ -1,83 +1,80 @@
 import ons from 'onsenui';
-import {inject, Container} from 'aurelia-dependency-injection';
+import {Container, inject} from 'aurelia-dependency-injection';
+import {createOverrideContext} from 'aurelia-binding';
+import {ViewSlot, ViewLocator, customElement, noView, BehaviorInstruction, bindable, CompositionTransaction, CompositionEngine, ShadowDOM, SwapStrategies} from 'aurelia-templating';
+import {Router} from 'aurelia-router';
+import {Origin} from 'aurelia-metadata';
 import {DOM} from 'aurelia-pal';
-import {ViewSlot, CompositionEngine, customElement, noView, bindable} from 'aurelia-templating';
-import {PageLoader} from './page-loader';
+import {RouterView} from 'aurelia-templating-router';
+import {RouterViewLocator} from 'aurelia-templating-router/router-view';
 import {invokeLifecycle} from './lifecycle';
 
 @customElement('ons-navigator')
 @noView
-@inject(DOM.Element, Container, CompositionEngine, PageLoader, ViewSlot)
-export class OnsNavigator {
-  @bindable page;
+@inject(DOM.Element, Container, ViewSlot, Router, ViewLocator, CompositionTransaction, CompositionEngine)
+export class OnsNavigator extends RouterView {
+  @bindable swapOrder;
+  @bindable layoutView;
+  @bindable layoutViewModel;
+  @bindable layoutModel;
   element;
 
-  constructor(element, container, compositionEngine, pageLoader, viewSlot) {
-    this.element = element;
-    this.container = container;
-    this.compositionEngine = compositionEngine;
-    this.pageLoader = pageLoader;
-    this.viewSlot = viewSlot;
+  constructor(element, container, viewSlot, router, viewLocator, compositionTransaction, compositionEngine) {
+    super(element, container, viewSlot, router, viewLocator, compositionTransaction, compositionEngine);
 
     this.element.pageLoader = new ons.PageLoader(this.load.bind(this), this.unload.bind(this));
-    this._pushPage = this.element.pushPage.bind(element);
-    this._popPage = this.element.popPage.bind(element);
-    this.element.pushPage = this.pushPage.bind(this);
-    this.element.popPage = this.popPage.bind(this);
 
-    this.controllers = [];
+    this.view;
+    this.viewStack = [];
   }
 
-  created(owningView) {
-    this.owningView = owningView;
-  }
-
-  bind(bindingContext, overrideContext) {
-    this.container.viewModel = bindingContext;
-    this.overrideContext = overrideContext;
+  swap(viewPortInstruction) {
+    let options = {
+      data: viewPortInstruction
+    }
+    if (viewPortInstruction.component.router.isExplicitNavigationBack) {
+      return this.element.popPage();
+    } else {
+      return this.element.pushPage(viewPortInstruction.moduleId, options);
+    }
   }
 
   load({page, parent, params}, done) {
-    this.compositionEngine.createController(this.nextPage).then((controller) => {
-      let pageElement = controller.view.fragment.firstElementChild;
-      this.nextPage = null;
-      controller.automate(this.overrideContext, this.owningView);
-      this.viewSlot.add(controller.view);
-      this.controllers.push(controller);
-      done(pageElement);
-    });
+    let viewPortInstruction = params;
+    let previousView = this.view;
+
+    let work = () => {
+      let pageElement = this.view.fragment.firstElementChild;
+      this.viewSlot.add(this.view);
+      if (previousView) {
+        this.viewStack.push(previousView);
+      }
+      this._notify();
+      return done(pageElement);
+    };
+
+    let ready = owningView => {
+      viewPortInstruction.controller.automate(this.overrideContext, owningView);
+      if (this.compositionTransactionOwnershipToken) {
+        return this.compositionTransactionOwnershipToken.waitForCompositionComplete().then(() => {
+          this.compositionTransactionOwnershipToken = null;
+          return work();
+        });
+      }
+
+      return work();
+    };
+
+    this.view = viewPortInstruction.controller.view;
+
+    return ready(this.owningView);
   }
 
   unload(pageElement) {
-    let controller = this.controllers.pop();
-    return invokeLifecycle(controller.viewModel, 'deactivate').then(() => {
-      this.viewSlot.remove(controller.view);
-      controller.view.unbind();
-    });
-  }
-
-  pushPage(page, options) {
-    options = options || {};
-    let config = {
-      moduleId: page,
-      model: options.data || {}
-    };
-    return this.pageLoader.loadPage(this, config).then((context) => {
-      invokeLifecycle(context.viewModel, 'canActivate', context.model).then((canActivate) => {
-        if (canActivate) {
-          this.nextPage = context;
-          this._pushPage(page, options);
-        }
-      });
-    });
-  }
-
-  popPage(options) {
-    let controller = this.controllers[this.controllers.length - 1];
-    return invokeLifecycle(controller.viewModel, 'canDeactivate').then((canDeactivate) => {
-      if (canDeactivate) {
-        this._popPage(options);
-      }
+    return invokeLifecycle(this.view.controller.viewModel, 'deactivate').then(() => {
+      this.viewSlot.remove(this.view);
+      this.view.unbind();
+      this.view = this.viewStack.pop();
     });
   }
 }
