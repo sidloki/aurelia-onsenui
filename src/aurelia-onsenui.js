@@ -10,7 +10,7 @@ export {OnsTabbar} from './ons-tabbar';
 import {PLATFORM} from 'aurelia-pal';
 import {BrowserHistory} from 'aurelia-history-browser';
 import {OnsRouter} from './ons-router';
-import {AppRouter, Router, RouteLoader} from 'aurelia-router';
+import {Router, RouteLoader} from 'aurelia-router';
 import {TemplatingRouteLoader} from 'aurelia-templating-router';
 import {RouteRecognizer} from 'aurelia-route-recognizer';
 

@@ -1,9 +1,10 @@
 import * as LogManager from 'aurelia-logging';
 import {Container, inject} from 'aurelia-dependency-injection';
 import {History} from 'aurelia-history';
-import {Router, PipelineProvider, AppRouter, isNavigationCommand} from 'aurelia-router';
-import {RouteRecognizer} from 'aurelia-route-recognizer';
+import {PipelineProvider, AppRouter, isNavigationCommand} from 'aurelia-router';
 import {EventAggregator} from 'aurelia-event-aggregator';
+
+const logger = LogManager.getLogger('app-router');
 
 @inject(Container, History, PipelineProvider, EventAggregator)
 export class OnsRouter extends AppRouter {
@@ -11,7 +12,7 @@ export class OnsRouter extends AppRouter {
   constructor(container, history, piplineProvider, events) {
     super(container, history, piplineProvider, events);
   }
-  
+
   _dequeueInstruction(instructionCount) {
     return Promise.resolve().then(() => {
       if (this.isNavigating && !instructionCount) {

@@ -3,7 +3,7 @@ import {Container, inject} from 'aurelia-dependency-injection';
 import {DOM} from 'aurelia-pal';
 import {
   bindable, CompositionEngine, CompositionTransaction,
-  customElement, noView, ShadowDOM, SwapStrategies, ViewSlot, ViewLocator
+  customElement, noView, ViewSlot, ViewLocator
 } from 'aurelia-templating';
 import {Router} from 'aurelia-router';
 import {RouterView} from 'aurelia-templating-router';
@@ -34,11 +34,10 @@ export class OnsNavigator extends RouterView {
       let options = router.currentInstruction.previousInstruction.config.settings.navigator || {};
       options.data = viewPortInstruction;
       return this.element.popPage(options);
-    } else {
-      let options = router.currentInstruction.config.settings.navigator || {};
-      options.data = viewPortInstruction;
-      return this.element.pushPage(viewPortInstruction.moduleId, options);
     }
+    let options = router.currentInstruction.config.settings.navigator || {};
+    options.data = viewPortInstruction;
+    return this.element.pushPage(viewPortInstruction.moduleId, options);
   }
 
   load({page, parent, params}, done) {
