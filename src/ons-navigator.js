@@ -29,13 +29,14 @@ export class OnsNavigator extends RouterView {
   }
 
   swap(viewPortInstruction) {
-    let options = {
-      data: viewPortInstruction
-    }
     let router = this.router;
     if (router.isNavigatingBack) {
+      let options = router.currentInstruction.previousInstruction.config.settings.navigator || {};
+      options.data = viewPortInstruction;
       return this.element.popPage(options);
     } else {
+      let options = router.currentInstruction.config.settings.navigator || {};
+      options.data = viewPortInstruction;
       return this.element.pushPage(viewPortInstruction.moduleId, options);
     }
   }
