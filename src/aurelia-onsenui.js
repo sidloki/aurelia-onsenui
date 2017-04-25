@@ -2,6 +2,7 @@ export {OnsBackButton} from './ons-back-button';
 export {OnsInput} from './ons-input';
 export {OnsNavigator} from './ons-navigator';
 export {OnsTab} from './ons-tab';
+export {OnsTabbar} from './ons-tabbar';
 
 import {PLATFORM} from 'aurelia-pal';
 import {BrowserHistory} from 'aurelia-history-browser';
@@ -60,6 +61,7 @@ export function configure(config) {
       './ons-input',
       './ons-navigator',
       './ons-tab',
+      './ons-tabbar',
       PLATFORM.moduleName('aurelia-templating-router/router-view'),
       PLATFORM.moduleName('aurelia-templating-router/route-href')
     ]);
