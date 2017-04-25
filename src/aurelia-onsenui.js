@@ -1,6 +1,9 @@
 export {OnsBackButton} from './ons-back-button';
 export {OnsInput} from './ons-input';
 export {OnsNavigator} from './ons-navigator';
+export {OnsRange} from './ons-range';
+export {OnsSelect} from './ons-select';
+export {OnsSwitch} from './ons-switch';
 export {OnsTab} from './ons-tab';
 export {OnsTabbar} from './ons-tabbar';
 
@@ -60,6 +63,9 @@ export function configure(config) {
       './ons-back-button',
       './ons-input',
       './ons-navigator',
+      './ons-range',
+      './ons-select',
+      './ons-switch',
       './ons-tab',
       './ons-tabbar',
       PLATFORM.moduleName('aurelia-templating-router/router-view'),

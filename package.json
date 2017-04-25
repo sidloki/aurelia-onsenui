@@ -111,6 +111,9 @@
       "resources": [
         "aurelia-onsenui/ons-input",
         "aurelia-onsenui/ons-navigator",
+        "aurelia-onsenui/ons-range",
+        "aurelia-onsenui/ons-select",
+        "aurelia-onsenui/ons-swipe",
         "aurelia-onsenui/ons-tab",
         "aurelia-onsenui/ons-tabbar"
       ]
