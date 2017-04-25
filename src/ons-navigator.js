@@ -1,13 +1,13 @@
 import ons from 'onsenui';
 import {Container, inject} from 'aurelia-dependency-injection';
-import {createOverrideContext} from 'aurelia-binding';
-import {ViewSlot, ViewLocator, customElement, noView, BehaviorInstruction, bindable, CompositionTransaction, CompositionEngine, ShadowDOM, SwapStrategies} from 'aurelia-templating';
-import {Router} from 'aurelia-router';
-import {Origin} from 'aurelia-metadata';
 import {DOM} from 'aurelia-pal';
+import {
+  bindable, CompositionEngine, CompositionTransaction,
+  customElement, noView, ShadowDOM, SwapStrategies, ViewSlot, ViewLocator
+} from 'aurelia-templating';
+import {Router} from 'aurelia-router';
 import {RouterView} from 'aurelia-templating-router';
-import {RouterViewLocator} from 'aurelia-templating-router/router-view';
-import {invokeLifecycle} from './lifecycle';
+
 
 @customElement('ons-navigator')
 @noView

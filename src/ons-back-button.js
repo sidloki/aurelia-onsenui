@@ -1,6 +1,6 @@
 import {inject} from 'aurelia-dependency-injection';
 import {DOM} from 'aurelia-pal';
-import {customElement, noView, bindable} from 'aurelia-templating';
+import {customElement, noView} from 'aurelia-templating';
 import {Router} from 'aurelia-router';
 
 @customElement('ons-back-button')
