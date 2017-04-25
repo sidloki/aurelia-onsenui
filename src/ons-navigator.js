@@ -73,10 +73,8 @@ export class OnsNavigator extends RouterView {
   }
 
   unload(pageElement) {
-    return invokeLifecycle(this.view.controller.viewModel, 'deactivate').then(() => {
-      this.viewSlot.remove(this.view);
-      this.view.unbind();
-      this.view = this.viewStack.pop();
-    });
+    this.viewSlot.remove(this.view);
+    this.view.unbind();
+    this.view = this.viewStack.pop();
   }
 }
