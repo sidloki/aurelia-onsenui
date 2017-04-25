@@ -2,6 +2,7 @@ import {inject} from 'aurelia-dependency-injection';
 import {DOM} from 'aurelia-pal';
 import {customElement, noView, bindable} from 'aurelia-templating';
 import {bindingMode} from 'aurelia-binding';
+import ons from 'onsenui';
 
 @customElement('ons-input')
 @noView
