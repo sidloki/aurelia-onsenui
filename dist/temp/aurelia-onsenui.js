@@ -132,12 +132,9 @@ var OnsTab = exports.OnsTab = (_dec3 = (0, _aureliaTemplating.customElement)('on
 
     this.bindingContext = bindingContext;
     this.overrideContext = overrideContext;
-    Object.entries(this.model).forEach(function (_ref) {
-      var key = _ref[0],
-          value = _ref[1];
-
+    Object.keys(this.model).forEach(function (key) {
       if (elementAttributes.indexOf(key) > -1) {
-        _this.element.setAttribute(key, value);
+        _this.element.setAttribute(key, _this.model[key]);
       }
     });
   };
@@ -147,12 +144,12 @@ var OnsTab = exports.OnsTab = (_dec3 = (0, _aureliaTemplating.customElement)('on
     this.overrideContext = null;
   };
 
-  OnsTab.prototype.load = function load(_ref2, done) {
+  OnsTab.prototype.load = function load(_ref, done) {
     var _this2 = this;
 
-    var page = _ref2.page,
-        parent = _ref2.parent,
-        params = _ref2.params;
+    var page = _ref.page,
+        parent = _ref.parent,
+        params = _ref.params;
 
     var instruction = {
       container: this.container,
@@ -313,12 +310,12 @@ var OnsNavigator = exports.OnsNavigator = (_dec14 = (0, _aureliaTemplating.custo
     return this.element.pushPage(viewPortInstruction.moduleId, options);
   };
 
-  OnsNavigator.prototype.load = function load(_ref3, done) {
+  OnsNavigator.prototype.load = function load(_ref2, done) {
     var _this4 = this;
 
-    var page = _ref3.page,
-        parent = _ref3.parent,
-        params = _ref3.params;
+    var page = _ref2.page,
+        parent = _ref2.parent,
+        params = _ref2.params;
 
     var viewPortInstruction = params;
     var previousView = this.view;

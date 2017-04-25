@@ -76,12 +76,9 @@ export var OnsTab = (_dec = customElement('ons-tab'), _dec2 = inject(DOM.Element
 
     this.bindingContext = bindingContext;
     this.overrideContext = overrideContext;
-    Object.entries(this.model).forEach(function (_ref) {
-      var key = _ref[0],
-          value = _ref[1];
-
+    Object.keys(this.model).forEach(function (key) {
       if (elementAttributes.indexOf(key) > -1) {
-        _this.element.setAttribute(key, value);
+        _this.element.setAttribute(key, _this.model[key]);
       }
     });
   };
@@ -91,12 +88,12 @@ export var OnsTab = (_dec = customElement('ons-tab'), _dec2 = inject(DOM.Element
     this.overrideContext = null;
   };
 
-  OnsTab.prototype.load = function load(_ref2, done) {
+  OnsTab.prototype.load = function load(_ref, done) {
     var _this2 = this;
 
-    var page = _ref2.page,
-        parent = _ref2.parent,
-        params = _ref2.params;
+    var page = _ref.page,
+        parent = _ref.parent,
+        params = _ref.params;
 
     var instruction = {
       container: this.container,

@@ -1,4 +1,8 @@
-# 0.2.0 (2017-04-25)
+## 0.2.1 (2017-04-25)
+
+* Fix usage of experimental Object.entries
+
+## 0.2.0 (2017-04-25)
 
 * Integrate ons-navigator with aurelia router
 * Add new elements (range, select, swipe, checkbox, radio)

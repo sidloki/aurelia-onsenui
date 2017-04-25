@@ -71,9 +71,9 @@ export let OnsTab = (_dec = customElement('ons-tab'), _dec2 = inject(DOM.Element
   bind(bindingContext, overrideContext) {
     this.bindingContext = bindingContext;
     this.overrideContext = overrideContext;
-    Object.entries(this.model).forEach(([key, value]) => {
+    Object.keys(this.model).forEach(key => {
       if (elementAttributes.indexOf(key) > -1) {
-        this.element.setAttribute(key, value);
+        this.element.setAttribute(key, this.model[key]);
       }
     });
   }
