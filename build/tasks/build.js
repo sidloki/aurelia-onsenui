@@ -36,6 +36,16 @@ function removeDTSPlugin(options) {
   return options;
 }
 
+gulp.task('build-html', function () {
+  return gulp.src(paths.html)
+    .pipe(gulp.dest(paths.output + 'es2015'))
+    .pipe(gulp.dest(paths.output + 'commonjs'))
+    .pipe(gulp.dest(paths.output + 'amd'))
+    .pipe(gulp.dest(paths.output + 'native-modules'))
+    .pipe(gulp.dest(paths.output + 'temp'))
+    .pipe(gulp.dest(paths.output + 'system'));
+});
+
 gulp.task('build-index', function() {
   var importsToAdd = paths.importsToAdd.slice();
 
@@ -125,6 +135,7 @@ gulp.task('build-dts', function() {
 gulp.task('build', function(callback) {
   return runSequence(
     'clean',
+    'build-html',
     'build-index',
     'build-es2015-temp',
     compileToModules
@@ -137,6 +148,7 @@ gulp.task('build', function(callback) {
 gulp.task('build-ts', function(callback) {
   return runSequence(
     'clean',
+    'build-html',
     'build-index',
     'build-babel-native-modules',
     compileToModules
