@@ -32,8 +32,9 @@ export class OnsNavigator extends RouterView {
     let options = {
       data: viewPortInstruction
     }
-    if (viewPortInstruction.component.router.isExplicitNavigationBack) {
-      return this.element.popPage();
+    let router = this.router;
+    if (router.isNavigatingBack) {
+      return this.element.popPage(options);
     } else {
       return this.element.pushPage(viewPortInstruction.moduleId, options);
     }
