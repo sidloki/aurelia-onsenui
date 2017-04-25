@@ -1,4 +1,4 @@
-define(['exports', 'onsenui', 'aurelia-dependency-injection', 'aurelia-pal', 'aurelia-templating', './page-loader'], function (exports, _onsenui, _aureliaDependencyInjection, _aureliaPal, _aureliaTemplating, _pageLoader) {
+define(['exports', 'onsenui', 'aurelia-dependency-injection', 'aurelia-pal', 'aurelia-templating'], function (exports, _onsenui, _aureliaDependencyInjection, _aureliaPal, _aureliaTemplating) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -59,25 +59,23 @@ define(['exports', 'onsenui', 'aurelia-dependency-injection', 'aurelia-pal', 'au
     throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
   }
 
-  var _dec, _dec2, _class, _desc, _value, _class2, _descriptor, _descriptor2;
+  var _dec, _dec2, _class, _desc, _value, _class2, _descriptor;
 
-  var OnsTab = exports.OnsTab = (_dec = (0, _aureliaTemplating.customElement)('ons-tab'), _dec2 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element, _aureliaDependencyInjection.Container, _aureliaTemplating.CompositionEngine, _pageLoader.PageLoader, _aureliaTemplating.ViewSlot), _dec(_class = (0, _aureliaTemplating.noView)(_class = _dec2(_class = (_class2 = function () {
-    function OnsTab(element, container, compositionEngine, pageLoader, viewSlot) {
+  var elementAttributes = ['page', 'icon', 'active-icon', 'label', 'badge', 'active'];
+
+  var OnsTab = exports.OnsTab = (_dec = (0, _aureliaTemplating.customElement)('ons-tab'), _dec2 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element, _aureliaDependencyInjection.Container, _aureliaTemplating.CompositionEngine, _aureliaTemplating.ViewSlot, _aureliaTemplating.ViewResources), _dec(_class = (0, _aureliaTemplating.noView)(_class = _dec2(_class = (_class2 = function () {
+    function OnsTab(element, container, compositionEngine, viewSlot, viewResources) {
       
 
-      _initDefineProp(this, 'page', _descriptor, this);
-
-      _initDefineProp(this, 'active', _descriptor2, this);
+      _initDefineProp(this, 'model', _descriptor, this);
 
       this.element = element;
       this.container = container;
       this.compositionEngine = compositionEngine;
-      this.pageLoader = pageLoader;
       this.viewSlot = viewSlot;
+      this.viewResources = viewResources;
 
       this.element.pageLoader = new _onsenui2.default.PageLoader(this.load.bind(this), this.unload.bind(this));
-
-      this.controller;
     }
 
     OnsTab.prototype.created = function created(owningView) {
@@ -85,45 +83,77 @@ define(['exports', 'onsenui', 'aurelia-dependency-injection', 'aurelia-pal', 'au
     };
 
     OnsTab.prototype.bind = function bind(bindingContext, overrideContext) {
-      this.container.viewModel = bindingContext;
-      this.overrideContext = overrideContext;
-    };
-
-    OnsTab.prototype.load = function load(_ref, done) {
       var _this = this;
 
-      var page = _ref.page,
-          parent = _ref.parent,
-          params = _ref.params;
+      this.bindingContext = bindingContext;
+      this.overrideContext = overrideContext;
+      Object.entries(this.model).forEach(function (_ref) {
+        var key = _ref[0],
+            value = _ref[1];
 
-      var config = {
-        moduleId: page,
-        model: params,
-        skipActivation: true
+        if (elementAttributes.indexOf(key) > -1) {
+          _this.element.setAttribute(key, value);
+        }
+      });
+    };
+
+    OnsTab.prototype.unbind = function unbind(bindingContext, overrideContext) {
+      this.bindingContext = null;
+      this.overrideContext = null;
+    };
+
+    OnsTab.prototype.load = function load(_ref2, done) {
+      var _this2 = this;
+
+      var page = _ref2.page,
+          parent = _ref2.parent,
+          params = _ref2.params;
+
+      var instruction = {
+        container: this.container,
+        model: this.model,
+        viewResources: this.viewResources
       };
-      this.pageLoader.loadPage(this, config).then(function (context) {
-        _this.compositionEngine.createController(context).then(function (controller) {
-          var pageElement = controller.view.fragment.firstElementChild;
-          controller.automate(_this.overrideContext, _this.owningView);
-          _this.viewSlot.add(controller.view);
-          _this.controller = controller;
-          done(pageElement);
-        });
+      if (/\.html/.test(page)) {
+        instruction.view = page;
+      } else {
+        instruction.viewModel = page;
+      }
+      this.compositionEngine.createController(instruction).then(function (controller) {
+        var pageElement = controller.view.fragment.firstElementChild;
+        controller.automate(_this2.overrideContext, _this2.owningView);
+        pageElement.view = controller.view;
+        done(pageElement);
       });
     };
 
     OnsTab.prototype.unload = function unload(pageElement) {
-      var controller = this.controller;
-      this.viewSlot.remove(controller.view);
-      controller.view.unbind();
+      return invokeLifecycle(pageElement.view.controller.viewModel, 'deactivate').then(function () {
+        pageElement.view.detached();
+        pageElement.view.unbind();
+      });
     };
 
     return OnsTab;
-  }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [_aureliaTemplating.bindable], {
-    enumerable: true,
-    initializer: null
-  }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'active', [_aureliaTemplating.bindable], {
+  }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'model', [_aureliaTemplating.bindable], {
     enumerable: true,
     initializer: null
   })), _class2)) || _class) || _class) || _class);
+
+
+  function invokeLifecycle(instance, name, model) {
+    if (typeof instance[name] === 'function') {
+      return Promise.resolve().then(function () {
+        return instance[name](model);
+      }).then(function (result) {
+        if (result !== null && result !== undefined) {
+          return result;
+        }
+
+        return true;
+      });
+    }
+
+    return Promise.resolve(true);
+  }
 });

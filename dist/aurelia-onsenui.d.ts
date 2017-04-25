@@ -1,56 +1,92 @@
 import ons from 'onsenui';
+import * as LogManager from 'aurelia-logging';
 import {
   inject,
   Container
 } from 'aurelia-dependency-injection';
 import {
-  CompositionEngine,
-  useView,
-  customElement,
-  noView,
-  bindable,
-  ViewSlot
-} from 'aurelia-templating';
-import {
-  relativeToFile
-} from 'aurelia-path';
-import {
-  Origin
-} from 'aurelia-metadata';
-import {
   DOM
 } from 'aurelia-pal';
 import {
+  customElement,
+  noView,
+  ViewSlot,
+  ViewResources,
+  CompositionEngine,
+  bindable,
+  CompositionTransaction,
+  ViewLocator
+} from 'aurelia-templating';
+import {
   bindingMode
 } from 'aurelia-binding';
-export declare class PageLoader {
-  constructor(compositionEngine?: any);
-  loadPage(parent?: any, config?: any): any;
+import {
+  Router,
+  PipelineProvider,
+  AppRouter,
+  isNavigationCommand
+} from 'aurelia-router';
+import {
+  RouterView
+} from 'aurelia-templating-router';
+import {
+  History
+} from 'aurelia-history';
+import {
+  EventAggregator
+} from 'aurelia-event-aggregator';
+export declare class OnsTabbar {
+  element: any;
+  constructor(element?: any);
+  switchPage(element?: any, options?: any): any;
 }
-export declare class OnsInput {
+export declare class OnsTab {
+  model: any;
+  element: any;
+  constructor(element?: any, container?: any, compositionEngine?: any, viewSlot?: any, viewResources?: any);
+  created(owningView?: any): any;
+  bind(bindingContext?: any, overrideContext?: any): any;
+  unbind(bindingContext?: any, overrideContext?: any): any;
+  load({
+    page,
+    parent,
+    params
+  }?: {
+    page?: any,
+    parent?: any,
+    params?: any
+  }, done?: any): any;
+  unload(pageElement?: any): any;
+}
+export declare class OnsSwitch {
+  value: any;
+  element: any;
+  constructor(element?: any);
+  onChange(): any;
+  valueChanged(newValue?: any, oldValue?: any): any;
+}
+export declare class OnsSelect {
+  value: any;
+  constructor(element?: any);
+  attached(): any;
+  onChange(): any;
+  valueChanged(newValue?: any, oldValue?: any): any;
+}
+export declare class OnsRange {
   value: any;
   element: any;
   constructor(element?: any);
   onInput(): any;
   valueChanged(newValue?: any, oldValue?: any): any;
 }
-
-/**
- * Call a lifecycle method on a viewModel if it exists.
- * @function
- * @param instance The viewModel instance.
- * @param name The lifecycle method name.
- * @param model The model to pass to the lifecycle method.
- * @returns Promise The result of the lifecycle method.
- */
-export declare function invokeLifecycle(instance?: any, name?: any, model?: any): any;
-export declare class OnsTab {
-  page: any;
-  active: any;
+export declare class OnsNavigator extends RouterView {
+  swapOrder: any;
+  layoutView: any;
+  layoutViewModel: any;
+  layoutModel: any;
   element: any;
-  constructor(element?: any, container?: any, compositionEngine?: any, pageLoader?: any, viewSlot?: any);
-  created(owningView?: any): any;
-  bind(bindingContext?: any, overrideContext?: any): any;
+  constructor(element?: any, container?: any, viewSlot?: any, router?: any, viewLocator?: any, compositionTransaction?: any, compositionEngine?: any);
+  swap(viewPortInstruction?: any): any;
   load({
     page,
     parent,
@@ -62,22 +98,24 @@ export declare class OnsTab {
   }, done?: any): any;
   unload(pageElement?: any): any;
 }
-export declare class OnsNavigator {
-  page: any;
+export declare class OnsInput {
+  value: any;
+  checked: any;
+  inputId: any;
+  disabled: any;
   element: any;
-  constructor(element?: any, container?: any, compositionEngine?: any, pageLoader?: any, viewSlot?: any);
-  created(owningView?: any): any;
-  bind(bindingContext?: any, overrideContext?: any): any;
-  load({
-    page,
-    parent,
-    params
-  }?: {
-    page?: any,
-    parent?: any,
-    params?: any
-  }, done?: any): any;
-  unload(pageElement?: any): any;
-  pushPage(page?: any, options?: any): any;
-  popPage(options?: any): any;
+  constructor(element?: any);
+  onContentReady(): any;
+  onInput(): any;
+  onChange(): any;
+  valueChanged(newValue?: any, oldValue?: any): any;
+  inputIdChanged(newValue?: any, oldValue?: any): any;
+  disabledChanged(newValue?: any, oldValue?: any): any;
+}
+export declare class OnsBackButton {
+  constructor(element?: any, router?: any);
+  onClick(): any;
+}
+export declare class OnsRouter extends AppRouter {
+  constructor(container?: any, history?: any, piplineProvider?: any, events?: any);
 }

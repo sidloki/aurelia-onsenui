@@ -1,4 +1,4 @@
-var _dec, _dec2, _class, _desc, _value, _class2, _descriptor;
+var _dec, _dec2, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4;
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -44,85 +44,89 @@ function _initializerWarningHelper(descriptor, context) {
 }
 
 import ons from 'onsenui';
-import { inject, Container } from 'aurelia-dependency-injection';
+import { Container, inject } from 'aurelia-dependency-injection';
 import { DOM } from 'aurelia-pal';
-import { ViewSlot, CompositionEngine, customElement, noView, bindable } from 'aurelia-templating';
-import { PageLoader } from './page-loader';
-import { invokeLifecycle } from './lifecycle';
+import { bindable, CompositionEngine, CompositionTransaction, customElement, noView, ViewSlot, ViewLocator } from 'aurelia-templating';
+import { Router } from 'aurelia-router';
+import { RouterView } from 'aurelia-templating-router';
 
-export let OnsNavigator = (_dec = customElement('ons-navigator'), _dec2 = inject(DOM.Element, Container, CompositionEngine, PageLoader, ViewSlot), _dec(_class = noView(_class = _dec2(_class = (_class2 = class OnsNavigator {
+export let OnsNavigator = (_dec = customElement('ons-navigator'), _dec2 = inject(DOM.Element, Container, ViewSlot, Router, ViewLocator, CompositionTransaction, CompositionEngine), _dec(_class = noView(_class = _dec2(_class = (_class2 = class OnsNavigator extends RouterView {
 
-  constructor(element, container, compositionEngine, pageLoader, viewSlot) {
-    _initDefineProp(this, 'page', _descriptor, this);
+  constructor(element, container, viewSlot, router, viewLocator, compositionTransaction, compositionEngine) {
+    super(element, container, viewSlot, router, viewLocator, compositionTransaction, compositionEngine);
 
-    this.element = element;
-    this.container = container;
-    this.compositionEngine = compositionEngine;
-    this.pageLoader = pageLoader;
-    this.viewSlot = viewSlot;
+    _initDefineProp(this, 'swapOrder', _descriptor, this);
+
+    _initDefineProp(this, 'layoutView', _descriptor2, this);
+
+    _initDefineProp(this, 'layoutViewModel', _descriptor3, this);
+
+    _initDefineProp(this, 'layoutModel', _descriptor4, this);
 
     this.element.pageLoader = new ons.PageLoader(this.load.bind(this), this.unload.bind(this));
-    this._pushPage = this.element.pushPage.bind(element);
-    this._popPage = this.element.popPage.bind(element);
-    this.element.pushPage = this.pushPage.bind(this);
-    this.element.popPage = this.popPage.bind(this);
 
-    this.controllers = [];
+    this.view;
+    this.viewStack = [];
   }
 
-  created(owningView) {
-    this.owningView = owningView;
-  }
-
-  bind(bindingContext, overrideContext) {
-    this.container.viewModel = bindingContext;
-    this.overrideContext = overrideContext;
+  swap(viewPortInstruction) {
+    let router = this.router;
+    if (router.isNavigatingBack) {
+      let options = router.currentInstruction.previousInstruction.config.settings.navigator || {};
+      options.data = viewPortInstruction;
+      return this.element.popPage(options);
+    }
+    let options = router.currentInstruction.config.settings.navigator || {};
+    options.data = viewPortInstruction;
+    return this.element.pushPage(viewPortInstruction.moduleId, options);
   }
 
   load({ page, parent, params }, done) {
-    this.compositionEngine.createController(this.nextPage).then(controller => {
-      let pageElement = controller.view.fragment.firstElementChild;
-      this.nextPage = null;
-      controller.automate(this.overrideContext, this.owningView);
-      this.viewSlot.add(controller.view);
-      this.controllers.push(controller);
-      done(pageElement);
-    });
+    let viewPortInstruction = params;
+    let previousView = this.view;
+
+    let work = () => {
+      let pageElement = this.view.fragment.firstElementChild;
+      this.viewSlot.add(this.view);
+      if (previousView) {
+        this.viewStack.push(previousView);
+      }
+      this._notify();
+      return done(pageElement);
+    };
+
+    let ready = owningView => {
+      viewPortInstruction.controller.automate(this.overrideContext, owningView);
+      if (this.compositionTransactionOwnershipToken) {
+        return this.compositionTransactionOwnershipToken.waitForCompositionComplete().then(() => {
+          this.compositionTransactionOwnershipToken = null;
+          return work();
+        });
+      }
+
+      return work();
+    };
+
+    this.view = viewPortInstruction.controller.view;
+
+    return ready(this.owningView);
   }
 
   unload(pageElement) {
-    let controller = this.controllers.pop();
-    return invokeLifecycle(controller.viewModel, 'deactivate').then(() => {
-      this.viewSlot.remove(controller.view);
-      controller.view.unbind();
-    });
+    this.viewSlot.remove(this.view);
+    this.view.unbind();
+    this.view = this.viewStack.pop();
   }
-
-  pushPage(page, options) {
-    options = options || {};
-    let config = {
-      moduleId: page,
-      model: options.data || {}
-    };
-    return this.pageLoader.loadPage(this, config).then(context => {
-      invokeLifecycle(context.viewModel, 'canActivate', context.model).then(canActivate => {
-        if (canActivate) {
-          this.nextPage = context;
-          this._pushPage(page, options);
-        }
-      });
-    });
-  }
-
-  popPage(options) {
-    let controller = this.controllers[this.controllers.length - 1];
-    return invokeLifecycle(controller.viewModel, 'canDeactivate').then(canDeactivate => {
-      if (canDeactivate) {
-        this._popPage(options);
-      }
-    });
-  }
-}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [bindable], {
+}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'swapOrder', [bindable], {
+  enumerable: true,
+  initializer: null
+}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'layoutView', [bindable], {
+  enumerable: true,
+  initializer: null
+}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'layoutViewModel', [bindable], {
+  enumerable: true,
+  initializer: null
+}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'layoutModel', [bindable], {
   enumerable: true,
   initializer: null
 })), _class2)) || _class) || _class) || _class);

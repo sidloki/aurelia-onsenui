@@ -1,4 +1,4 @@
-var _dec, _dec2, _class, _desc, _value, _class2, _descriptor, _descriptor2;
+var _dec, _dec2, _class, _desc, _value, _class2, _descriptor;
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -46,25 +46,22 @@ function _initializerWarningHelper(descriptor, context) {
 import ons from 'onsenui';
 import { inject, Container } from 'aurelia-dependency-injection';
 import { DOM } from 'aurelia-pal';
-import { ViewSlot, CompositionEngine, customElement, noView, bindable } from 'aurelia-templating';
-import { PageLoader } from './page-loader';
+import { ViewSlot, ViewResources, CompositionEngine, customElement, noView, bindable } from 'aurelia-templating';
 
-export let OnsTab = (_dec = customElement('ons-tab'), _dec2 = inject(DOM.Element, Container, CompositionEngine, PageLoader, ViewSlot), _dec(_class = noView(_class = _dec2(_class = (_class2 = class OnsTab {
+const elementAttributes = ['page', 'icon', 'active-icon', 'label', 'badge', 'active'];
 
-  constructor(element, container, compositionEngine, pageLoader, viewSlot) {
-    _initDefineProp(this, 'page', _descriptor, this);
+export let OnsTab = (_dec = customElement('ons-tab'), _dec2 = inject(DOM.Element, Container, CompositionEngine, ViewSlot, ViewResources), _dec(_class = noView(_class = _dec2(_class = (_class2 = class OnsTab {
 
-    _initDefineProp(this, 'active', _descriptor2, this);
+  constructor(element, container, compositionEngine, viewSlot, viewResources) {
+    _initDefineProp(this, 'model', _descriptor, this);
 
     this.element = element;
     this.container = container;
     this.compositionEngine = compositionEngine;
-    this.pageLoader = pageLoader;
     this.viewSlot = viewSlot;
+    this.viewResources = viewResources;
 
     this.element.pageLoader = new ons.PageLoader(this.load.bind(this), this.unload.bind(this));
-
-    this.controller;
   }
 
   created(owningView) {
@@ -72,36 +69,62 @@ export let OnsTab = (_dec = customElement('ons-tab'), _dec2 = inject(DOM.Element
   }
 
   bind(bindingContext, overrideContext) {
-    this.container.viewModel = bindingContext;
+    this.bindingContext = bindingContext;
     this.overrideContext = overrideContext;
+    Object.entries(this.model).forEach(([key, value]) => {
+      if (elementAttributes.indexOf(key) > -1) {
+        this.element.setAttribute(key, value);
+      }
+    });
+  }
+
+  unbind(bindingContext, overrideContext) {
+    this.bindingContext = null;
+    this.overrideContext = null;
   }
 
   load({ page, parent, params }, done) {
-    let config = {
-      moduleId: page,
-      model: params,
-      skipActivation: true
+    let instruction = {
+      container: this.container,
+      model: this.model,
+      viewResources: this.viewResources
     };
-    this.pageLoader.loadPage(this, config).then(context => {
-      this.compositionEngine.createController(context).then(controller => {
-        let pageElement = controller.view.fragment.firstElementChild;
-        controller.automate(this.overrideContext, this.owningView);
-        this.viewSlot.add(controller.view);
-        this.controller = controller;
-        done(pageElement);
-      });
+    if (/\.html/.test(page)) {
+      instruction.view = page;
+    } else {
+      instruction.viewModel = page;
+    }
+    this.compositionEngine.createController(instruction).then(controller => {
+      let pageElement = controller.view.fragment.firstElementChild;
+      controller.automate(this.overrideContext, this.owningView);
+      pageElement.view = controller.view;
+      done(pageElement);
     });
   }
 
   unload(pageElement) {
-    let controller = this.controller;
-    this.viewSlot.remove(controller.view);
-    controller.view.unbind();
+    return invokeLifecycle(pageElement.view.controller.viewModel, 'deactivate').then(() => {
+      pageElement.view.detached();
+      pageElement.view.unbind();
+    });
   }
-}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'page', [bindable], {
-  enumerable: true,
-  initializer: null
-}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'active', [bindable], {
+}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'model', [bindable], {
   enumerable: true,
   initializer: null
 })), _class2)) || _class) || _class) || _class);
+
+function invokeLifecycle(instance, name, model) {
+  if (typeof instance[name] === 'function') {
+    return Promise.resolve().then(() => {
+      return instance[name](model);
+    }).then(function (result) {
+      if (result !== null && result !== undefined) {
+        return result;
+      }
+
+      return true;
+    });
+  }
+
+  return Promise.resolve(true);
+}

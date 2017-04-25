@@ -1,10 +1,18 @@
-define(['exports', 'aurelia-dependency-injection', 'aurelia-pal', 'aurelia-templating', 'aurelia-binding'], function (exports, _aureliaDependencyInjection, _aureliaPal, _aureliaTemplating, _aureliaBinding) {
+define(['exports', 'aurelia-dependency-injection', 'aurelia-pal', 'aurelia-templating', 'aurelia-binding', 'onsenui'], function (exports, _aureliaDependencyInjection, _aureliaPal, _aureliaTemplating, _aureliaBinding, _onsenui) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
   exports.OnsInput = undefined;
+
+  var _onsenui2 = _interopRequireDefault(_onsenui);
+
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+      default: obj
+    };
+  }
 
   function _initDefineProp(target, property, descriptor, context) {
     if (!descriptor) return;
@@ -51,28 +59,85 @@ define(['exports', 'aurelia-dependency-injection', 'aurelia-pal', 'aurelia-templ
     throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
   }
 
-  var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor;
+  var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4;
 
-  var OnsInput = exports.OnsInput = (_dec = (0, _aureliaTemplating.customElement)('ons-input'), _dec2 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element), _dec3 = (0, _aureliaTemplating.bindable)({ defaultBindingMode: _aureliaBinding.bindingMode.twoWay }), _dec(_class = (0, _aureliaTemplating.noView)(_class = _dec2(_class = (_class2 = function () {
+  var OnsInput = exports.OnsInput = (_dec = (0, _aureliaTemplating.customElement)('ons-input'), _dec2 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element), _dec3 = (0, _aureliaTemplating.bindable)({ defaultBindingMode: _aureliaBinding.bindingMode.twoWay }), _dec4 = (0, _aureliaTemplating.bindable)({ defaultBindingMode: _aureliaBinding.bindingMode.twoWay }), _dec(_class = (0, _aureliaTemplating.noView)(_class = _dec2(_class = (_class2 = function () {
     function OnsInput(element) {
       
 
       _initDefineProp(this, 'value', _descriptor, this);
 
+      _initDefineProp(this, 'checked', _descriptor2, this);
+
+      _initDefineProp(this, 'inputId', _descriptor3, this);
+
+      _initDefineProp(this, 'disabled', _descriptor4, this);
+
       this.element = element;
       this.element.oninput = this.onInput.bind(this);
+      this.element.onchange = this.onChange.bind(this);
+      _onsenui2.default._contentReady(this.element, this.onContentReady.bind(this));
     }
+
+    OnsInput.prototype.onContentReady = function onContentReady() {
+      switch (this.element.type) {
+        case 'radio':
+          this.element.checked = this.value === this.checked;
+          break;
+        case 'checkbox':
+          this.element.checked = this.checked.includes(this.value);
+          break;
+        default:
+          break;
+      }
+    };
 
     OnsInput.prototype.onInput = function onInput() {
       this.value = this.element.value;
+    };
+
+    OnsInput.prototype.onChange = function onChange() {
+      switch (this.element.type) {
+        case 'radio':
+          this.checked = this.value;
+          break;
+        case 'checkbox':
+          var index = this.checked.indexOf(this.value);
+          index > -1 ? this.checked.splice(index, index + 1) : this.checked.push(this.value);
+          break;
+        default:
+          this.value = this.element.value;
+          break;
+      }
     };
 
     OnsInput.prototype.valueChanged = function valueChanged(newValue, oldValue) {
       this.element.value = newValue;
     };
 
+    OnsInput.prototype.inputIdChanged = function inputIdChanged(newValue, oldValue) {
+      this.element.setAttribute('input-id', newValue);
+    };
+
+    OnsInput.prototype.disabledChanged = function disabledChanged(newValue, oldValue) {
+      if (newValue) {
+        this.element.setAttribute('disabled', newValue);
+      } else {
+        this.element.removeAttribute('disabled');
+      }
+    };
+
     return OnsInput;
   }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
+    enumerable: true,
+    initializer: null
+  }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'checked', [_dec4], {
+    enumerable: true,
+    initializer: null
+  }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'inputId', [_aureliaTemplating.bindable], {
+    enumerable: true,
+    initializer: null
+  }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'disabled', [_aureliaTemplating.bindable], {
     enumerable: true,
     initializer: null
   })), _class2)) || _class) || _class) || _class);
