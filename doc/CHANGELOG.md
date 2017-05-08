@@ -1,3 +1,7 @@
+## 0.2.2 (2017-05-08)
+
+* Fix Edge/IE page loading 
+
 ## 0.2.1 (2017-04-25)
 
 * Fix usage of experimental Object.entries

@@ -162,7 +162,7 @@ var OnsTab = exports.OnsTab = (_dec3 = (0, _aureliaTemplating.customElement)('on
       instruction.viewModel = page;
     }
     this.compositionEngine.createController(instruction).then(function (controller) {
-      var pageElement = controller.view.fragment.firstElementChild;
+      var pageElement = controller.view.fragment.querySelector('ons-page');
       controller.automate(_this2.overrideContext, _this2.owningView);
       pageElement.view = controller.view;
       done(pageElement);
@@ -321,7 +321,7 @@ var OnsNavigator = exports.OnsNavigator = (_dec14 = (0, _aureliaTemplating.custo
     var previousView = this.view;
 
     var work = function work() {
-      var pageElement = _this4.view.fragment.firstElementChild;
+      var pageElement = _this4.view.fragment.querySelector('ons-page');
       _this4.viewSlot.add(_this4.view);
       if (previousView) {
         _this4.viewStack.push(previousView);

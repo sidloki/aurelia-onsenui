@@ -86,7 +86,7 @@ export let OnsNavigator = (_dec = customElement('ons-navigator'), _dec2 = inject
     let previousView = this.view;
 
     let work = () => {
-      let pageElement = this.view.fragment.firstElementChild;
+      let pageElement = this.view.fragment.querySelector('ons-page');
       this.viewSlot.add(this.view);
       if (previousView) {
         this.viewStack.push(previousView);

@@ -142,7 +142,7 @@ System.register(['onsenui', 'aurelia-dependency-injection', 'aurelia-pal', 'aure
           var previousView = this.view;
 
           var work = function work() {
-            var pageElement = _this2.view.fragment.firstElementChild;
+            var pageElement = _this2.view.fragment.querySelector('ons-page');
             _this2.viewSlot.add(_this2.view);
             if (previousView) {
               _this2.viewStack.push(previousView);

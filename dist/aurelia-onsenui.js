@@ -82,7 +82,7 @@ export class OnsTab {
       instruction.viewModel = page;
     }
     this.compositionEngine.createController(instruction).then((controller) => {
-      let pageElement = controller.view.fragment.firstElementChild;
+      let pageElement = controller.view.fragment.querySelector('ons-page');
       controller.automate(this.overrideContext, this.owningView);
       pageElement.view = controller.view;
       done(pageElement);
@@ -219,7 +219,7 @@ export class OnsNavigator extends RouterView {
     let previousView = this.view;
 
     let work = () => {
-      let pageElement = this.view.fragment.firstElementChild;
+      let pageElement = this.view.fragment.querySelector('ons-page');
       this.viewSlot.add(this.view);
       if (previousView) {
         this.viewStack.push(previousView);

@@ -120,7 +120,7 @@ var OnsTab = exports.OnsTab = (_dec = (0, _aureliaTemplating.customElement)('ons
       instruction.viewModel = page;
     }
     this.compositionEngine.createController(instruction).then(function (controller) {
-      var pageElement = controller.view.fragment.firstElementChild;
+      var pageElement = controller.view.fragment.querySelector('ons-page');
       controller.automate(_this2.overrideContext, _this2.owningView);
       pageElement.view = controller.view;
       done(pageElement);
