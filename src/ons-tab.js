@@ -53,7 +53,7 @@ export class OnsTab {
       instruction.viewModel = page;
     }
     this.compositionEngine.createController(instruction).then((controller) => {
-      let pageElement = controller.view.fragment.firstElementChild;
+      let pageElement = controller.view.fragment.querySelector('ons-page');
       controller.automate(this.overrideContext, this.owningView);
       pageElement.view = controller.view;
       done(pageElement);
