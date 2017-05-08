@@ -199,7 +199,7 @@ BrowserHistory.prototype._getFragment = function(fragment, forcePushState) {
 BrowserHistory.prototype._checkUrl = function(event) {
   let current = this._getFragment();
   if (current !== this.fragment) {
-    if (event.type === "popstate") {
+    if (event.type === 'popstate') {
       this.history.replaceState(event.state, null);
     }
     this._loadUrl();
