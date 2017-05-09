@@ -1,6 +1,10 @@
+## 0.2.3 (2017-05-09)
+
+* Add missing dependencies
+
 ## 0.2.2 (2017-05-08)
 
-* Fix Edge/IE page loading 
+* Fix Edge/IE page loading
 
 ## 0.2.1 (2017-04-25)
 
