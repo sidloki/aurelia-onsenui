@@ -318,6 +318,21 @@ export class OnsInput {
   }
 }
 
+@customElement('ons-icon')
+@noView
+@inject(DOM.Element)
+export class OnsIcon {
+  @bindable icon;
+
+  constructor(element) {
+    this.element = element;
+  }
+
+  iconChanged(newValue, oldValue) {
+    this.element.setAttribute('icon', newValue);
+  }
+}
+
 @customElement('ons-back-button')
 @noView
 @inject(DOM.Element, Router)

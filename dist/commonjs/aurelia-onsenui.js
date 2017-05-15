@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OnsTabbar = exports.OnsTab = exports.OnsSwitch = exports.OnsSelect = exports.OnsRange = exports.OnsNavigator = exports.OnsInput = exports.OnsBackButton = undefined;
+exports.OnsTabbar = exports.OnsTab = exports.OnsSwitch = exports.OnsSelect = exports.OnsRange = exports.OnsNavigator = exports.OnsInput = exports.OnsIcon = exports.OnsBackButton = undefined;
 
 var _onsBackButton = require('./ons-back-button');
 
@@ -11,6 +11,15 @@ Object.defineProperty(exports, 'OnsBackButton', {
   enumerable: true,
   get: function get() {
     return _onsBackButton.OnsBackButton;
+  }
+});
+
+var _onsIcon = require('./ons-icon');
+
+Object.defineProperty(exports, 'OnsIcon', {
+  enumerable: true,
+  get: function get() {
+    return _onsIcon.OnsIcon;
   }
 });
 
@@ -274,7 +283,7 @@ _aureliaHistoryBrowser.BrowserHistory.prototype._checkUrl = function (event) {
 };
 
 function configure(config) {
-  config.singleton(_aureliaRouter.RouteLoader, _aureliaTemplatingRouter.TemplatingRouteLoader).singleton(_aureliaRouter.Router, _onsRouter.OnsRouter).globalResources(['./ons-back-button', './ons-input', './ons-navigator', './ons-range', './ons-select', './ons-switch', './ons-tab', './ons-tabbar', _aureliaPal.PLATFORM.moduleName('aurelia-templating-router/router-view'), _aureliaPal.PLATFORM.moduleName('aurelia-templating-router/route-href')]);
+  config.singleton(_aureliaRouter.RouteLoader, _aureliaTemplatingRouter.TemplatingRouteLoader).singleton(_aureliaRouter.Router, _onsRouter.OnsRouter).globalResources(['./ons-back-button', './ons-icon', './ons-input', './ons-navigator', './ons-range', './ons-select', './ons-switch', './ons-tab', './ons-tabbar', _aureliaPal.PLATFORM.moduleName('aurelia-templating-router/router-view'), _aureliaPal.PLATFORM.moduleName('aurelia-templating-router/route-href')]);
 
   config.container.registerAlias(_aureliaRouter.Router, _onsRouter.OnsRouter);
 }

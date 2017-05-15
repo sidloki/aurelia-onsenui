@@ -1,4 +1,5 @@
 export {OnsBackButton} from './ons-back-button';
+export {OnsIcon} from './ons-icon';
 export {OnsInput} from './ons-input';
 export {OnsNavigator} from './ons-navigator';
 export {OnsRange} from './ons-range';
@@ -212,6 +213,7 @@ export function configure(config) {
     .singleton(Router, OnsRouter)
     .globalResources([
       './ons-back-button',
+      './ons-icon',
       './ons-input',
       './ons-navigator',
       './ons-range',

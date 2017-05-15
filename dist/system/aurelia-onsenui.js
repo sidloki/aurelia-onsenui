@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['./ons-back-button', './ons-input', './ons-navigator', './ons-range', './ons-select', './ons-switch', './ons-tab', './ons-tabbar', 'aurelia-pal', 'aurelia-history-browser', './ons-router', 'aurelia-router', 'aurelia-templating-router', 'aurelia-route-recognizer'], function (_export, _context) {
+System.register(['./ons-back-button', './ons-icon', './ons-input', './ons-navigator', './ons-range', './ons-select', './ons-switch', './ons-tab', './ons-tabbar', 'aurelia-pal', 'aurelia-history-browser', './ons-router', 'aurelia-router', 'aurelia-templating-router', 'aurelia-route-recognizer'], function (_export, _context) {
   "use strict";
 
   var DOM, PLATFORM, BrowserHistory, OnsRouter, Router, RouteLoader, TemplatingRouteLoader, RouteRecognizer, routeStripper, rootStripper, trailingSlash, absoluteUrl;
@@ -16,7 +16,7 @@ System.register(['./ons-back-button', './ons-input', './ons-navigator', './ons-r
   }
 
   function configure(config) {
-    config.singleton(RouteLoader, TemplatingRouteLoader).singleton(Router, OnsRouter).globalResources(['./ons-back-button', './ons-input', './ons-navigator', './ons-range', './ons-select', './ons-switch', './ons-tab', './ons-tabbar', PLATFORM.moduleName('aurelia-templating-router/router-view'), PLATFORM.moduleName('aurelia-templating-router/route-href')]);
+    config.singleton(RouteLoader, TemplatingRouteLoader).singleton(Router, OnsRouter).globalResources(['./ons-back-button', './ons-icon', './ons-input', './ons-navigator', './ons-range', './ons-select', './ons-switch', './ons-tab', './ons-tabbar', PLATFORM.moduleName('aurelia-templating-router/router-view'), PLATFORM.moduleName('aurelia-templating-router/route-href')]);
 
     config.container.registerAlias(Router, OnsRouter);
   }
@@ -29,41 +29,46 @@ System.register(['./ons-back-button', './ons-input', './ons-navigator', './ons-r
       _exportObj.OnsBackButton = _onsBackButton.OnsBackButton;
 
       _export(_exportObj);
-    }, function (_onsInput) {
+    }, function (_onsIcon) {
       var _exportObj2 = {};
-      _exportObj2.OnsInput = _onsInput.OnsInput;
+      _exportObj2.OnsIcon = _onsIcon.OnsIcon;
 
       _export(_exportObj2);
-    }, function (_onsNavigator) {
+    }, function (_onsInput) {
       var _exportObj3 = {};
-      _exportObj3.OnsNavigator = _onsNavigator.OnsNavigator;
+      _exportObj3.OnsInput = _onsInput.OnsInput;
 
       _export(_exportObj3);
-    }, function (_onsRange) {
+    }, function (_onsNavigator) {
       var _exportObj4 = {};
-      _exportObj4.OnsRange = _onsRange.OnsRange;
+      _exportObj4.OnsNavigator = _onsNavigator.OnsNavigator;
 
       _export(_exportObj4);
-    }, function (_onsSelect) {
+    }, function (_onsRange) {
       var _exportObj5 = {};
-      _exportObj5.OnsSelect = _onsSelect.OnsSelect;
+      _exportObj5.OnsRange = _onsRange.OnsRange;
 
       _export(_exportObj5);
-    }, function (_onsSwitch) {
+    }, function (_onsSelect) {
       var _exportObj6 = {};
-      _exportObj6.OnsSwitch = _onsSwitch.OnsSwitch;
+      _exportObj6.OnsSelect = _onsSelect.OnsSelect;
 
       _export(_exportObj6);
-    }, function (_onsTab) {
+    }, function (_onsSwitch) {
       var _exportObj7 = {};
-      _exportObj7.OnsTab = _onsTab.OnsTab;
+      _exportObj7.OnsSwitch = _onsSwitch.OnsSwitch;
 
       _export(_exportObj7);
-    }, function (_onsTabbar) {
+    }, function (_onsTab) {
       var _exportObj8 = {};
-      _exportObj8.OnsTabbar = _onsTabbar.OnsTabbar;
+      _exportObj8.OnsTab = _onsTab.OnsTab;
 
       _export(_exportObj8);
+    }, function (_onsTabbar) {
+      var _exportObj9 = {};
+      _exportObj9.OnsTabbar = _onsTabbar.OnsTabbar;
+
+      _export(_exportObj9);
     }, function (_aureliaPal) {
       DOM = _aureliaPal.DOM;
       PLATFORM = _aureliaPal.PLATFORM;

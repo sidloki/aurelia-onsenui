@@ -112,6 +112,11 @@ export declare class OnsInput {
   inputIdChanged(newValue?: any, oldValue?: any): any;
   disabledChanged(newValue?: any, oldValue?: any): any;
 }
+export declare class OnsIcon {
+  icon: any;
+  constructor(element?: any);
+  iconChanged(newValue?: any, oldValue?: any): any;
+}
 export declare class OnsBackButton {
   constructor(element?: any, router?: any);
   onClick(): any;

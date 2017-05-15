@@ -1,4 +1,5 @@
 export { OnsBackButton } from './ons-back-button';
+export { OnsIcon } from './ons-icon';
 export { OnsInput } from './ons-input';
 export { OnsNavigator } from './ons-navigator';
 export { OnsRange } from './ons-range';
@@ -198,7 +199,7 @@ BrowserHistory.prototype._checkUrl = function (event) {
 };
 
 export function configure(config) {
-  config.singleton(RouteLoader, TemplatingRouteLoader).singleton(Router, OnsRouter).globalResources(['./ons-back-button', './ons-input', './ons-navigator', './ons-range', './ons-select', './ons-switch', './ons-tab', './ons-tabbar', PLATFORM.moduleName('aurelia-templating-router/router-view'), PLATFORM.moduleName('aurelia-templating-router/route-href')]);
+  config.singleton(RouteLoader, TemplatingRouteLoader).singleton(Router, OnsRouter).globalResources(['./ons-back-button', './ons-icon', './ons-input', './ons-navigator', './ons-range', './ons-select', './ons-switch', './ons-tab', './ons-tabbar', PLATFORM.moduleName('aurelia-templating-router/router-view'), PLATFORM.moduleName('aurelia-templating-router/route-href')]);
 
   config.container.registerAlias(Router, OnsRouter);
 }

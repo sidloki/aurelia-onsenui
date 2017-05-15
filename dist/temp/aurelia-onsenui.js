@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OnsRouter = exports.OnsBackButton = exports.OnsInput = exports.OnsNavigator = exports.OnsRange = exports.OnsSelect = exports.OnsSwitch = exports.OnsTab = exports.OnsTabbar = undefined;
+exports.OnsRouter = exports.OnsBackButton = exports.OnsIcon = exports.OnsInput = exports.OnsNavigator = exports.OnsRange = exports.OnsSelect = exports.OnsSwitch = exports.OnsTab = exports.OnsTabbar = undefined;
 
-var _dec, _dec2, _class, _dec3, _dec4, _class2, _desc, _value, _class3, _descriptor, _dec5, _dec6, _dec7, _class5, _desc2, _value2, _class6, _descriptor2, _dec8, _dec9, _dec10, _class8, _desc3, _value3, _class9, _descriptor3, _dec11, _dec12, _dec13, _class11, _desc4, _value4, _class12, _descriptor4, _dec14, _dec15, _class14, _desc5, _value5, _class15, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _dec16, _dec17, _dec18, _dec19, _class17, _desc6, _value6, _class18, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _dec20, _dec21, _class20, _dec22, _class21;
+var _dec, _dec2, _class, _dec3, _dec4, _class2, _desc, _value, _class3, _descriptor, _dec5, _dec6, _dec7, _class5, _desc2, _value2, _class6, _descriptor2, _dec8, _dec9, _dec10, _class8, _desc3, _value3, _class9, _descriptor3, _dec11, _dec12, _dec13, _class11, _desc4, _value4, _class12, _descriptor4, _dec14, _dec15, _class14, _desc5, _value5, _class15, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _dec16, _dec17, _dec18, _dec19, _class17, _desc6, _value6, _class18, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _dec20, _dec21, _class20, _desc7, _value7, _class21, _descriptor13, _dec22, _dec23, _class23, _dec24, _class24;
 
 var _onsenui = require('onsenui');
 
@@ -447,7 +447,25 @@ var OnsInput = exports.OnsInput = (_dec16 = (0, _aureliaTemplating.customElement
   enumerable: true,
   initializer: null
 })), _class18)) || _class17) || _class17) || _class17);
-var OnsBackButton = exports.OnsBackButton = (_dec20 = (0, _aureliaTemplating.customElement)('ons-back-button'), _dec21 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element, _aureliaRouter.Router), _dec20(_class20 = (0, _aureliaTemplating.noView)(_class20 = _dec21(_class20 = function () {
+var OnsIcon = exports.OnsIcon = (_dec20 = (0, _aureliaTemplating.customElement)('ons-icon'), _dec21 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element), _dec20(_class20 = (0, _aureliaTemplating.noView)(_class20 = _dec21(_class20 = (_class21 = function () {
+  function OnsIcon(element) {
+    _classCallCheck(this, OnsIcon);
+
+    _initDefineProp(this, 'icon', _descriptor13, this);
+
+    this.element = element;
+  }
+
+  OnsIcon.prototype.iconChanged = function iconChanged(newValue, oldValue) {
+    this.element.setAttribute('icon', newValue);
+  };
+
+  return OnsIcon;
+}(), (_descriptor13 = _applyDecoratedDescriptor(_class21.prototype, 'icon', [_aureliaTemplating.bindable], {
+  enumerable: true,
+  initializer: null
+})), _class21)) || _class20) || _class20) || _class20);
+var OnsBackButton = exports.OnsBackButton = (_dec22 = (0, _aureliaTemplating.customElement)('ons-back-button'), _dec23 = (0, _aureliaDependencyInjection.inject)(_aureliaPal.DOM.Element, _aureliaRouter.Router), _dec22(_class23 = (0, _aureliaTemplating.noView)(_class23 = _dec23(_class23 = function () {
   function OnsBackButton(element, router) {
     _classCallCheck(this, OnsBackButton);
 
@@ -461,12 +479,12 @@ var OnsBackButton = exports.OnsBackButton = (_dec20 = (0, _aureliaTemplating.cus
   };
 
   return OnsBackButton;
-}()) || _class20) || _class20) || _class20);
+}()) || _class23) || _class23) || _class23);
 
 
 var logger = LogManager.getLogger('app-router');
 
-var OnsRouter = exports.OnsRouter = (_dec22 = (0, _aureliaDependencyInjection.inject)(_aureliaDependencyInjection.Container, _aureliaHistory.History, _aureliaRouter.PipelineProvider, _aureliaEventAggregator.EventAggregator), _dec22(_class21 = function (_AppRouter) {
+var OnsRouter = exports.OnsRouter = (_dec24 = (0, _aureliaDependencyInjection.inject)(_aureliaDependencyInjection.Container, _aureliaHistory.History, _aureliaRouter.PipelineProvider, _aureliaEventAggregator.EventAggregator), _dec24(_class24 = function (_AppRouter) {
   _inherits(OnsRouter, _AppRouter);
 
   function OnsRouter(container, history, piplineProvider, events) {
@@ -536,7 +554,7 @@ var OnsRouter = exports.OnsRouter = (_dec22 = (0, _aureliaDependencyInjection.in
   };
 
   return OnsRouter;
-}(_aureliaRouter.AppRouter)) || _class21);
+}(_aureliaRouter.AppRouter)) || _class24);
 
 
 function processResult(instruction, result, instructionCount, router) {

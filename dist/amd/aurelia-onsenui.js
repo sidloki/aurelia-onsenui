@@ -1,14 +1,20 @@
-define(['exports', './ons-back-button', './ons-input', './ons-navigator', './ons-range', './ons-select', './ons-switch', './ons-tab', './ons-tabbar', 'aurelia-pal', 'aurelia-history-browser', './ons-router', 'aurelia-router', 'aurelia-templating-router', 'aurelia-route-recognizer'], function (exports, _onsBackButton, _onsInput, _onsNavigator, _onsRange, _onsSelect, _onsSwitch, _onsTab, _onsTabbar, _aureliaPal, _aureliaHistoryBrowser, _onsRouter, _aureliaRouter, _aureliaTemplatingRouter, _aureliaRouteRecognizer) {
+define(['exports', './ons-back-button', './ons-icon', './ons-input', './ons-navigator', './ons-range', './ons-select', './ons-switch', './ons-tab', './ons-tabbar', 'aurelia-pal', 'aurelia-history-browser', './ons-router', 'aurelia-router', 'aurelia-templating-router', 'aurelia-route-recognizer'], function (exports, _onsBackButton, _onsIcon, _onsInput, _onsNavigator, _onsRange, _onsSelect, _onsSwitch, _onsTab, _onsTabbar, _aureliaPal, _aureliaHistoryBrowser, _onsRouter, _aureliaRouter, _aureliaTemplatingRouter, _aureliaRouteRecognizer) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.OnsTabbar = exports.OnsTab = exports.OnsSwitch = exports.OnsSelect = exports.OnsRange = exports.OnsNavigator = exports.OnsInput = exports.OnsBackButton = undefined;
+  exports.OnsTabbar = exports.OnsTab = exports.OnsSwitch = exports.OnsSelect = exports.OnsRange = exports.OnsNavigator = exports.OnsInput = exports.OnsIcon = exports.OnsBackButton = undefined;
   Object.defineProperty(exports, 'OnsBackButton', {
     enumerable: true,
     get: function () {
       return _onsBackButton.OnsBackButton;
+    }
+  });
+  Object.defineProperty(exports, 'OnsIcon', {
+    enumerable: true,
+    get: function () {
+      return _onsIcon.OnsIcon;
     }
   });
   Object.defineProperty(exports, 'OnsInput', {
@@ -240,7 +246,7 @@ define(['exports', './ons-back-button', './ons-input', './ons-navigator', './ons
   };
 
   function configure(config) {
-    config.singleton(_aureliaRouter.RouteLoader, _aureliaTemplatingRouter.TemplatingRouteLoader).singleton(_aureliaRouter.Router, _onsRouter.OnsRouter).globalResources(['./ons-back-button', './ons-input', './ons-navigator', './ons-range', './ons-select', './ons-switch', './ons-tab', './ons-tabbar', _aureliaPal.PLATFORM.moduleName('aurelia-templating-router/router-view'), _aureliaPal.PLATFORM.moduleName('aurelia-templating-router/route-href')]);
+    config.singleton(_aureliaRouter.RouteLoader, _aureliaTemplatingRouter.TemplatingRouteLoader).singleton(_aureliaRouter.Router, _onsRouter.OnsRouter).globalResources(['./ons-back-button', './ons-icon', './ons-input', './ons-navigator', './ons-range', './ons-select', './ons-switch', './ons-tab', './ons-tabbar', _aureliaPal.PLATFORM.moduleName('aurelia-templating-router/router-view'), _aureliaPal.PLATFORM.moduleName('aurelia-templating-router/route-href')]);
 
     config.container.registerAlias(_aureliaRouter.Router, _onsRouter.OnsRouter);
   }
