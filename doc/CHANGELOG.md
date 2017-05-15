@@ -1,3 +1,7 @@
+## 0.2.4 (2017-05-15)
+
+* Add icon element
+
 ## 0.2.3 (2017-05-09)
 
 * Add missing dependencies
