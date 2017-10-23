@@ -1,3 +1,8 @@
+## 0.2.5 (2017-10-23)
+
+* Wrap global resources with `PLATFORM.moduleName`
+* Fix build with Node.js version 8
+
 ## 0.2.4 (2017-05-15)
 
 * Add icon element

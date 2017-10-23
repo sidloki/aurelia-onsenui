@@ -283,7 +283,7 @@ _aureliaHistoryBrowser.BrowserHistory.prototype._checkUrl = function (event) {
 };
 
 function configure(config) {
-  config.singleton(_aureliaRouter.RouteLoader, _aureliaTemplatingRouter.TemplatingRouteLoader).singleton(_aureliaRouter.Router, _onsRouter.OnsRouter).globalResources(['./ons-back-button', './ons-icon', './ons-input', './ons-navigator', './ons-range', './ons-select', './ons-switch', './ons-tab', './ons-tabbar', _aureliaPal.PLATFORM.moduleName('aurelia-templating-router/router-view'), _aureliaPal.PLATFORM.moduleName('aurelia-templating-router/route-href')]);
+  config.singleton(_aureliaRouter.RouteLoader, _aureliaTemplatingRouter.TemplatingRouteLoader).singleton(_aureliaRouter.Router, _onsRouter.OnsRouter).globalResources([_aureliaPal.PLATFORM.moduleName('./ons-back-button'), _aureliaPal.PLATFORM.moduleName('./ons-icon'), _aureliaPal.PLATFORM.moduleName('./ons-input'), _aureliaPal.PLATFORM.moduleName('./ons-navigator'), _aureliaPal.PLATFORM.moduleName('./ons-range'), _aureliaPal.PLATFORM.moduleName('./ons-select'), _aureliaPal.PLATFORM.moduleName('./ons-switch'), _aureliaPal.PLATFORM.moduleName('./ons-tab'), _aureliaPal.PLATFORM.moduleName('./ons-tabbar'), _aureliaPal.PLATFORM.moduleName('aurelia-templating-router/router-view'), _aureliaPal.PLATFORM.moduleName('aurelia-templating-router/route-href')]);
 
   config.container.registerAlias(_aureliaRouter.Router, _onsRouter.OnsRouter);
 }
