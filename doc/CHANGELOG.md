@@ -1,3 +1,7 @@
+## 0.3.0 (unreleased)
+
+* Drop router patch to detect navigation direction
+
 ## 0.2.5 (2017-10-23)
 
 * Wrap global resources with `PLATFORM.moduleName`
